@@ -1,0 +1,7 @@
+Ajoute ces classes à DatabaseSeeder::run():
+
+$this->call([
+    SpecialtySeeder::class,
+    DoctorSeeder::class,
+    AdminUserSeeder::class,
+]);
