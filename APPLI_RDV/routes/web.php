@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RendezVousController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PatientController;
@@ -30,8 +31,8 @@ Route::view('/inscrire-cabinet', 'cabinets.register')->name('cabinets.register.s
 Route::view('/connexion-cabinet', 'auth.login-cabinet')->name('cabinets.login.show');
 
 /* Placeholder : lien "Prendre RDV" (à brancher plus tard) */
-Route::get('/rendez-vous/nouveau', fn () => 'Formulaire RDV (à venir)')
-    ->name('rendezvous.create');
+// Route::get('/rendez-vous/nouveau', fn () => 'Formulaire RDV (à venir)')
+//     ->name('rendezvous.create');
 
 
 // =====================================================
@@ -68,6 +69,23 @@ Route::prefix('patient')->middleware(['auth', 'can:access-patient'])->group(func
     Route::post('/profil/password',   [PatientProfileController::class, 'updatePassword'])->name('patient.password.update');
     Route::post('/preferences',       [PatientProfileController::class, 'updatePreferences'])->name('patient.preferences.update');
 });
+
+// routes/web.php
+// routes/web.php
+// use App\Http\Controllers\RendezVousController;
+
+Route::middleware(['auth'])->group(function () {
+    // URL FR que tu utilises actuellement
+    Route::get('/rendez-vous/nouveau', [RendezVousController::class, 'create'])
+        ->name('rendezvous.create');
+
+    // Enregistrement du RDV
+    Route::post('/rendezvous', [RendezVousController::class, 'store'])
+        ->name('rendezvous.store');
+});
+
+
+
 
 /* Admin */
 Route::prefix('admin')->middleware(['auth', 'can:access-admin'])->group(function () {

@@ -12,6 +12,12 @@
             <p class="text-sm text-gray-500">Suivi des consultations, filtres rapides et actions.</p>
         </div>
         <div class="flex gap-2">
+            {{-- NOUVEAU bouton Planifier (ajouté) --}}
+            <a href="{{ route('rendezvous.create') }}"
+               class="inline-flex items-center rounded-md px-3 py-2 text-sm font-medium border border-transparent bg-indigo-600 text-white hover:bg-indigo-700">
+                Planifier
+            </a>
+            {{-- Bouton existant conservé --}}
             <a href="{{ route('rendezvous.create') }}"
                class="inline-flex items-center rounded-md px-3 py-2 text-sm font-medium border border-transparent bg-indigo-600 text-white hover:bg-indigo-700">
                 + Nouveau rendez-vous
